@@ -1,5 +1,3 @@
-import org.joda.time.DateTime;
-import org.joda.time.Days;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
