@@ -27,6 +27,8 @@ public class Zadanie2 extends HttpServlet {
 //        rozwiazanie2(req, responseOutput);
 //        responseOutput.write("roz 3");
 //        rozwiazanie3(req, responseOutput);
+//        jeden test!!!!!!!!!!
+        responseOutput.write("<p>jeden test!!!!</p>");
         HttpSession session = req.getSession();
         int licz = rozwiazanie3(req, responseOutput);
         int suma = pamietacz(session, licz);
