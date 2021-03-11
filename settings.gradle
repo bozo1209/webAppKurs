@@ -1,8 +1,6 @@
 rootProject.name = 'webAppKurs'
 
-include 'gretty.plugin'
 include 'lekcja01'
 include 'lekcja02'
-
-
+include 'lekcja03'
 
