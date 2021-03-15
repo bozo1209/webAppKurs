@@ -4,6 +4,7 @@ subprojects {
     apply plugin: 'war'
     apply from: 'https://raw.github.com/gretty-gradle-plugin/gretty/master/pluginScripts/gretty.plugin'
 
+    sourceCompatibility = 1.8
     group 'org.example'
     version '1.0-SNAPSHOT'
 
