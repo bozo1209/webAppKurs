@@ -1,2 +1,4 @@
+przyklady/CORSFilter.java
+ przyklady.CORSFilter
 przyklady/ReservationWebservice.java
  przyklady.ReservationWebservice
