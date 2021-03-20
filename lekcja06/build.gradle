@@ -4,6 +4,13 @@ dependencies {
     providedCompile group: 'javax.json', name: 'javax.json-api', version: '1.1.2'
     providedCompile group: 'javax.json.bind', name: 'javax.json.bind-api', version: '1.0'
     providedCompile group: 'javax.enterprise', name: 'cdi-api', version: '2.0'
+
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.2'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.2'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 task explodedWar(type: Copy) {

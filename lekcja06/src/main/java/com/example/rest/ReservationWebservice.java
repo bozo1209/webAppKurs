@@ -18,6 +18,10 @@ public class ReservationWebservice {
     @SuppressWarnings("unused")
     private ReservationDAO dao;
 
+    @Inject
+    @SuppressWarnings("unused")
+    private CheckIfReservationIsPossible checkIfReservationIsPossible;
+
     @GET
     public Response listReservations() {
         return Response.ok(dao.getAll()).build();
@@ -38,8 +42,11 @@ public class ReservationWebservice {
     public Response updateReservation(@PathParam("id") @Min(0) Integer id, @Valid Reservation reservation) {
         boolean hasReservation = dao.getById(id) != null;
         if (hasReservation) {
-            dao.updateReservation(id, reservation);
-            return Response.noContent().build();
+            if (checkIfReservationIsPossible.reservationIsPossible(reservation, dao)){
+                dao.updateReservation(id, reservation);
+                return Response.noContent().build();
+            }
+            return Response.ok("Nie mozna z zmienic rezerwacji. Wybrany termin jest juz zajety dla wybranego stolika").build();
         }
         return Response.status(Response.Status.NOT_FOUND).build();
     }
@@ -56,13 +63,16 @@ public class ReservationWebservice {
 
     @POST
     public Response createReservation(@Valid Reservation reservation) {
-        int newId = dao.createReservation(reservation);
-        URI location;
-        try {
-            location = new URI("reservations/" + newId);
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+        if (checkIfReservationIsPossible.reservationIsPossible(reservation, dao)){
+            int newId = dao.createReservation(reservation);
+            URI location;
+            try {
+                location = new URI("reservations/" + newId);
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+            return Response.created(location).build();
         }
-        return Response.created(location).build();
+        return Response.ok("Nie mozna zalazyc nowej rezerwacji. Wybrany termin jest juz zajety dla wybranego stolika").build();
     }
 }
