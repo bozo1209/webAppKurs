@@ -1,0 +1,9 @@
+
+
+
+task explodedWar(type: Copy){
+    into "$buildDir/explodedWar"
+    with war
+}
+
+war.dependsOn explodedWar
